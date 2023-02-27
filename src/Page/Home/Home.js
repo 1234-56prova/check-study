@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 
 const Home = () => {
@@ -14,14 +13,12 @@ const Home = () => {
         error,
       ] = useSignInWithEmailAndPassword(auth);
 
-    const [navigate] = useNavigate();
-    const [data, setData] = useState([]);
+    const navigate = useNavigate();
 
     if (user) {
-
-        navigate('/home');
-
+        navigate('/study-form')
     }
+    
     return (
 
         <div className=' bg-black text-slate-50'>
@@ -30,17 +27,14 @@ const Home = () => {
 
             <form onSubmit={
                 handleSubmit ((data) => {
-                    setData(JSON.stringify(data))
-                    console.log('done!');
+                    signInWithEmailAndPassword(data.email, data.password)
                 })
             }>
              
                 <input className='m-10 pl-20 p-4 w-96 rounded-md text-black' {...register("email")} placeholder="Email"  type='email'/> <br/>
-
                 <input className='m-10 pl-20 p-4 w-96 rounded-md text-black' {...register("password")} placeholder="Password" type='password' /> <br/>
-
-                <input type="submit" onClick={signInWithEmailAndPassword(data.email, data.password)} className='p-4 bg-slate-50 w-96 rounded-md text-black m-2' />
-
+               <input type="submit" className='p-4 bg-slate-50 w-96 rounded-md text-black m-2' />
+            
             </form>
 
         </div>

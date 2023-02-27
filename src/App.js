@@ -1,8 +1,6 @@
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { Route, Routes } from 'react-router-dom';
 
 import './App.css';
-import auth from './firebase.init';
 
 import Header from './Page/Header/Header';
 
@@ -11,14 +9,11 @@ import Studyform from './Page/Studyform/Studyform';
 
 
 function App() {
-  const [user] = useAuthState(auth)
+  
   return (
     <div className="App">
-
       <Header/>
-
       <Routes>
-
         <Route path='/' element={<Home></Home>}/>
         <Route path='/study-form' element={<Studyform/>}></Route>
       </Routes>

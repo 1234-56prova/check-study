@@ -11,7 +11,7 @@ const Header = () => {
 
     const handleSignOut = () => {
         signOut(auth);
-        navigate('/study-form')
+        navigate('/')
     }
 
     return (
@@ -20,7 +20,7 @@ const Header = () => {
             <header className='pt-10 flex '>
                 <h1 className='text-4xl grow text-center'>STUDY-FORM</h1>
                 {
-                    user ? <Link to='/' className='text-2xl p-4' onClick={handleSignOut()}>Logout</Link> : <Link to='/' className='text-2xl '>Login</Link>
+                    user ? <Link to='/' className='text-2xl p-4' onClick={() => {handleSignOut()}}>Logout</Link> : <Link to='/' className='text-2xl '></Link>
                 }
             </header>
         </div>

@@ -1,24 +1,28 @@
+import { signOut } from 'firebase/auth';
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 
 const Header = () => {
 
     const [user] = useAuthState(auth);
+    const navigate = useNavigate();
 
-
+    const handleSignOut = () => {
+        signOut(auth);
+        navigate('/study-form')
+    }
 
     return (
 
-        <div className=' bg-slate-50 h-20'>
-
-            <nav className='flex flex-row-reverse'>
-{
-            user ? <Link to='/' className='text-2xl text-center p-4'>Logout</Link> :  <Link to='/' className='text-2xl text-center p-4'>Login</Link>
-}
-            </nav>
-
+        <div className=' bg-slate-50'>
+            <header className='pt-10 flex '>
+                <h1 className='text-4xl grow text-center'>STUDY-FORM</h1>
+                {
+                    user ? <Link to='/' className='text-2xl p-4' onClick={handleSignOut()}>Logout</Link> : <Link to='/' className='text-2xl '>Login</Link>
+                }
+            </header>
         </div>
 
     );

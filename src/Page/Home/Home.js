@@ -3,6 +3,7 @@ import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import { useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import Studyform from '../Studyform/Studyform';
 
 const Home = () => {
 
@@ -24,20 +25,26 @@ const Home = () => {
     return (
 
         <div className=' bg-black text-slate-50'>
+            {user ?
+                <div>
+                    <form onSubmit={
+                        handleSubmit((data) => {
+                            signInWithEmailAndPassword(data.email, data.password)
+                        })
+                    }>
 
-            <p className='text-6xl mt-48'>Who are you?</p>
+                        <input className='m-10 pl-20 p-4 w-96 rounded-md text-black' {...register("email")} placeholder="Email" type='email' /> <br />
+                        <input className='m-10 pl-20 p-4 w-96 rounded-md text-black' {...register("password")} placeholder="Password" type='password' /> <br />
+                        <input type="submit" className='p-4 bg-slate-50 w-96 rounded-md text-black m-2' />
 
-            <form onSubmit={
-                handleSubmit((data) => {
-                    signInWithEmailAndPassword(data.email, data.password)
-                })
-            }>
+                    </form>
+                </div>
+                :
+                <div>
+                    <Studyform/>
+                </div>
+                }
 
-                <input className='m-10 pl-20 p-4 w-96 rounded-md text-black' {...register("email")} placeholder="Email" type='email' /> <br />
-                <input className='m-10 pl-20 p-4 w-96 rounded-md text-black' {...register("password")} placeholder="Password" type='password' /> <br />
-                <input type="submit" className='p-4 bg-slate-50 w-96 rounded-md text-black m-2' />
-
-            </form>
 
         </div>
 
